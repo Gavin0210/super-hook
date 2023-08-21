@@ -1,9 +1,16 @@
-#include "jfile.h"
-#include "pie-a64-decoder.h"
 #include <cerrno>
+#include <cstdlib>
 #include <cstring>
 #include <dlfcn.h>
+#include <fcntl.h>
+#include <fstream>
 #include <iostream>
+#include <stdint.h>
+#include <stdio.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <vector>
 
 #define PAGE_SIZE 4096
 #define ALIGN_TO_4KB(address) (((uint64_t)address) & ~(0xFFF))

@@ -17,13 +17,25 @@ struct ARGS {
   uint64_t x3;
 };
 
-void proxy_func(struct ARGS *args) {
-  xx0 = args->x0;
-  xx1 = args->x1;
-  xx2 = args->x2;
+extern "C" void hnit(uint64_t x0, uint64_t x1, uint64_t x2) {
+  if (x0 + x1 + x2 > 0) {
+    printf("%lx", xx0);
+    printf("%lx", xx1);
+    printf("%lx", xx2);
+  }
+}
+
+extern "C" void proxy_func(struct ARGS *args) {
+  auto x0 = args->x0;
+  auto x1 = args->x1;
+  auto x2 = args->x2;
+
+  if (x2 == 0x100) {
+    hnit(x0, x1, x2);
+  }
 };
 
-int main() {
+extern "C" int main() {
 
   auto libc_base = get_libc_base();
   change_rxw(libc_base);
@@ -37,13 +49,11 @@ int main() {
 
   write_p = (uint32_t *)libc_base;
   // // 复制代理函数地址到x16
-  a64_copy_to_reg_64bits(&write_p, x16, (uint64_t)proxy_func);
+  a64_copy_to_reg_64bits(&write_p, 16, (uint64_t)proxy_func);
 
   auto tmp_size =
       (uint8_t *)&end_of_dispatcher_s - (uint8_t *)&start_of_dispatcher_s;
   memcpy(write_p, &start_of_dispatcher_s, tmp_size);
-  // logd("pwd size:{}", tmp_size);
-
   write_p += (tmp_size / 4);
 
   *write_p++ = ins_save;
@@ -53,26 +63,6 @@ int main() {
   // 调到libc开头
   a64_branch_helper(hook_addr, (uint64_t)libc_base, false);
   __builtin___clear_cache((char *)hook_addr, (char *)hook_addr + 4);
-
-  uint8_t buff[0x200];
-  uint8_t buff2[0x200];
-  buff[0] = 0;
-
-  // puts("qwe");
-  memcpy(buff, buff2, 0x200);
-  // puts((char *)buff);
-  // putchar((char)qwe);
-
-  *hook_addr = ins_save;
-  __builtin___clear_cache((char *)hook_addr, (char *)hook_addr + 4);
-  printf("%lx\n", xx2);
-  printf("buff: %lx\n ", buff);
-  printf("xx0: %lx\n ", xx0);
-
-  // __builtin___clear_cache((char *)hook_addr, (char *)hook_addr + 4);
-
-  // printf("qwe: %lx", qwe);
-  // logd("pwd");
 
   return 0;
 }
