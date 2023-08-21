@@ -17,25 +17,25 @@
 using namespace std;
 using namespace chrono;
 
-#include <fmt/core.h>
-#include <fmt/format.h>
+// #include <fmt/core.h>
+// #include <fmt/format.h>
 
-#define source_info fmt::format("{}:{}", __FILE__, __LINE__)
+// #define source_info fmt::format("{}:{}", __FILE__, __LINE__)
 
-#define logi(x, ...)                                                           \
-  cout << fmt::format("{:<5} {:<25} ", "INFO", source_info)                    \
-       << fmt::format(x, ##__VA_ARGS__) << endl
+// #define logi(x, ...)                                                           \
+//   cout << fmt::format("{:<5} {:<25} ", "INFO", source_info)                    \
+//        << fmt::format(x, ##__VA_ARGS__) << endl
 
-#define logd(x, ...)                                                           \
-  cout << fmt::format("{:<5} {:<25} ", "DEBUG", source_info)                   \
-       << fmt::format(x, ##__VA_ARGS__) << endl
+// #define logd(x, ...)                                                           \
+//   cout << fmt::format("{:<5} {:<25} ", "DEBUG", source_info)                   \
+//        << fmt::format(x, ##__VA_ARGS__) << endl
 
-#define loge(x, ...)                                                           \
-  cout << fmt::format("{:<5} {:<25} ", "ERROR", source_info)                   \
-       << fmt::format(x, ##__VA_ARGS__) << endl;                               \
-  exit(-1)
+// #define loge(x, ...)                                                           \
+//   cout << fmt::format("{:<5} {:<25} ", "ERROR", source_info)                   \
+//        << fmt::format(x, ##__VA_ARGS__) << endl;                               \
+//   exit(-1)
 
-#define fmt(x, ...) fmt::format(x, ##__VA_ARGS__)
+// #define fmt(x, ...) fmt::format(x, ##__VA_ARGS__)
 
 class JFile {
 public:

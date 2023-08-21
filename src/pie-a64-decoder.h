@@ -1,4 +1,55 @@
 #include <stdint.h>
+
+enum reg
+{             // +--------------+
+    x0 = 0,   // | X0           |
+    x1 = 1,   // | X1           |
+    x2 = 2,   // | X2           |
+    x3 = 3,   // | X3           |
+    x4 = 4,   // | X4           |
+    x5 = 5,   // | X5           |
+    x6 = 6,   // | X6           |
+    x7 = 7,   // | X7           |
+    x8 = 8,   // | X8 (XR)      |
+    x9 = 9,   // | X9           |
+    x10 = 10, // | X10          |
+    x11 = 11, // | X11          |
+    x12 = 12, // | X12          |
+    x13 = 13, // | X13          |
+    x14 = 14, // | X14          |
+    x15 = 15, // | X15          |
+    x16 = 16, // | X16 (IP0)    |
+    x17 = 17, // | X17 (IP1)    |
+    x18 = 18, // | X18 (PR)     |
+    x19 = 19, // | X19          |
+    x20 = 20, // | X20          |
+    x21 = 21, // | X21          |
+    x22 = 22, // | X22          |
+    x23 = 23, // | X23          |
+    x24 = 24, // | X24          |
+    x25 = 25, // | X25          |
+    x26 = 26, // | X26          |
+    x27 = 27, // | X27          |
+    x28 = 28, // | X28          |
+    x29 = 29, // | X29 (FP)     |
+    x30 = 30, // | X30 (LR)     |
+    x31 = 31, // | X31 (SP/XZR) |
+    reg_invalid = 32
+}; // +--------------+
+
+enum reg_alt
+{
+    xr = x8,   // Designated Indirect Result Location Parameter
+    ip0 = x16, // Intra-Procedure Call temporary registers
+    ip1 = x17, // Intra-Procedure Call temporary registers
+    pr = x18,  // Platform Register
+    es = x19,  // the first calleE-Saved register - not a standard alias
+    fp = x29,  // Frame Pointer
+    lr = x30,  // Link register
+    sp = x31,  // Stack Pointer
+    xzr = x31, // Zero Register
+};
+
 typedef enum
 {
     A64_CBZ_CBNZ,
